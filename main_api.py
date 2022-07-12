@@ -14,7 +14,7 @@ import azure.functions as func
 # lm_hostname = os.environ.get('LM_Url')
 # conn_str = os.environ.get('RedisConn')
 conn_str = "rds-lm-az2-dev.redis.cache.windows.net:6380,password=MfJdAtwtjyuYg0RliL3WSVVDjoL42ugjMqZiF7NZOUU=,ssl=True,abortConnect=False"
-lm_hostname = "nttltdsandbox.logicmonitor.com"
+lm_hostname = "nttltdsandbx.logicmonitor.com"
 connStr = conn_str.split(',')
 myHostname = connStr[0].split(':')[0]
 myPassword=re.findall(r"(?<==).*",connStr[1])[0]
