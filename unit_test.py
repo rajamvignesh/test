@@ -4,3 +4,6 @@ def get_api():
         pass
     else:
         raise ValueError("Mismatch data")
+    
+def test_init():
+    get_api()
