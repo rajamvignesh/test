@@ -25,7 +25,7 @@ def generate_token(resource_path):
         # access_id = os.environ.get('LMAccessId')
         # access_key = os.environ.get('LMAccessKey')
         access_id = "5N48nz9394dHsgg688sb"
-        access_key = "XGAx48y%9uLy^tk_JfksL6E5WJ4Za]Y_9{y{f2J"
+        access_key = "XGAx48y%9uLy^tk_JfksL6E5WJ4Za]Y_9L{y{f2J"
 
         AccessId = access_id
         AccessKey = access_key
