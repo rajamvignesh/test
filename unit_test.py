@@ -1,4 +1,4 @@
-from ...main_api import *
+from main_api import *
 def get_api():
     if get_data == "my_api_data":
         pass
