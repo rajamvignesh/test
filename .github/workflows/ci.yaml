@@ -23,6 +23,11 @@ jobs:
         if: job.status == 'success'
         run: |
           pip install requests
+      - name: Publish Test Results - TESTING
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: "test-results/**/*.xml"
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
