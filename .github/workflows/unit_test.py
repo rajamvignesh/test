@@ -1,7 +1,6 @@
-def capitalize_string(s):
-    if not isinstance(s, str):
-        raise TypeError('Please provide a string')
-    return s.capitalize()
-
-def test_capitalize_string():
-    assert capitalize_string('test') == 'Test'
+from ...main_api import *
+def get_api():
+    if get_data == "my_api_data":
+        pass
+    else:
+        raise ValueError("Mismatch data")
