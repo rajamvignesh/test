@@ -13,5 +13,5 @@ def get_lm_data():
     except Exception as exception:
         raise
 
-#def test_data():
-get_lm_data()
+def test_data():
+    get_lm_data()
