@@ -1,4 +1,5 @@
-import main_api
+# import 
+import src.main_api as main_api
 
 def get_lm_data():
     try:
@@ -12,5 +13,5 @@ def get_lm_data():
     except Exception as exception:
         raise
 
-def test_data():
-    get_lm_data()
+#def test_data():
+get_lm_data()
