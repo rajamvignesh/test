@@ -11,21 +11,20 @@ import re
 
 import azure.functions as func
 
-# lm_hostname = os.environ.get('LM_Url')
-# conn_str = os.environ.get('RedisConn')
-conn_str = "rds-lm-az2-dev.redis.cache.windows.net:6380,password=MfJdAtwtjyuYg0RliL3WSVVDjoL42ugjMqZiF7NZOUU=,ssl=True,abortConnect=False"
-lm_hostname = "nttltdsandbox.logicmonitor.com"
-connStr = conn_str.split(',')
-myHostname = connStr[0].split(':')[0]
-myPassword=re.findall(r"(?<==).*",connStr[1])[0]
+
+# conn_str = "rds-lm-az2-dev.redis.cache.windows.net:6380,password=MfJdAtwtjyuYg0RliL3WSVVDjoL42ugjMqZiF7NZOUU=,ssl=True,abortConnect=False"
+# lm_hostname = "nttltdsandbox.logicmonitor.com"
+# connStr = conn_str.split(',')
+# myHostname = connStr[0].split(':')[0]
+# myPassword=re.findall(r"(?<==).*",connStr[1])[0]
 
 
 def generate_token(resource_path):
     try:
-        # access_id = os.environ.get('LMAccessId')
-        # access_key = os.environ.get('LMAccessKey')
-        access_id = "5N48nz9394dHsgg688sb"
-        access_key = "XGAx48y%9uLy^tk_JfksL6E5WJ4Za]Y_9L{y{f2J"
+        access_id = os.environ.get('LMAccessId')
+        access_key = os.environ.get('LMAccessKey')
+        # access_id = "5N48nz9394dHsgg688sb"
+        # access_key = "XGAx48y%9uLy^tk_JfksL6E5WJ4Za]Y_9L{y{f2J"
 
         AccessId = access_id
         AccessKey = access_key
@@ -42,11 +41,13 @@ def generate_token(resource_path):
         return "Token Invalid"
 
 
-def process_lm_data():
-    try:        
-        global get_lm_res
+def process_lm_data(dashboard_name):
+    try:       
+        lm_hostname = os.environ.get('LM_Url')
+        conn_str = os.environ.get('RedisConn') 
+        global get_lm_response
         ## get dashboard ID ##    
-        dashboard_name = "NTTA-NI Sunnyvale Lab"
+        # dashboard_name = "NTTA-NI Sunnyvale Lab"
         logging.info(dashboard_name)
         resource_path = '/dashboard/dashboards'
         dashboard_token = generate_token(resource_path)
@@ -57,7 +58,7 @@ def process_lm_data():
 
         response = requests.request("GET", url=lm_dashboard_url, headers=headers)
         data = response.json()
-        get_lm_res = data
+        get_lm_response = data
         # print (get_lm_res)
         logging.info(data)
         status_response = response.status_code
@@ -80,5 +81,10 @@ def process_lm_data():
     except:
         logging.info("failed to process data")
 
-if __name__ == "__main__":
-    process_lm_data()
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')    
+    data_body = req.get_body()
+    print (data_body)
+    # data_body = {"dashboardName":"NTTA-NI Sunnyvale Lab"}
+    status_response = 200
+    return func.HttpResponse(data_body,status_code=200)
