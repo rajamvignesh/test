@@ -7,8 +7,9 @@ import json
 
 class Main_test_funct(unittest.TestCase):
 
-    # import pdb; pdb.set_trace()
+    Client_id = os.environ['CLIENT_ID']
     @mock.patch('src.main_api')
+    # ----------- Mock Env Variables ---------------
     @mock.patch.dict("os.environ", {
         "LM_Url": "nttltdsandbox.logicmonitor.com",
         "RedisConn": "rds-lm-az2-dev.redis.cache.windows.net:6380,password=MfJdAtwtjyuYg0RliL3WSVVDjoL42ugjMqZiF7NZOUU=,ssl=True,abortConnect=False",
@@ -29,6 +30,7 @@ class Main_test_funct(unittest.TestCase):
     @mock.patch('src.main_api')
     def test_main(self,mock_main_code):
         try:
+            # ----------- Mock HTTP Body Request ---------------
             req = func.HttpRequest(
             method='Post',
             body=b'{"dashboardName":""}',
