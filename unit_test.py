@@ -7,7 +7,6 @@ import json
 
 class Main_test_funct(unittest.TestCase):
 
-    Client_id = os.environ['CLIENT_ID']
     LM_Url = os.environ['LM_URL']
     @mock.patch('src.main_api')
     # ----------- Mock Env Variables ---------------
