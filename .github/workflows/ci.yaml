@@ -22,7 +22,6 @@ jobs:
           CLIENT_ID : ${{ secrets.CLIENT_ID }}
         run: |
           echo SECRET_KEY: "$CLIENT_ID"
-          python -c 'import os;print(os.environ['CLIENT_ID'])
       - name: Run tests with pytest
         run: pytest
       - name: Check the git build status
