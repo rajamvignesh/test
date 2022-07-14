@@ -19,9 +19,9 @@ jobs:
           pip install -r requirements.txt
       - name: Get Env Variables
         env:
-          get_client_id : ${{ secrets.CLIENT_ID }}
+          CLIENT_ID : ${{ secrets.CLIENT_ID }}
         run: |
-          echo "{{ get_client_id }}"
+          echo "{{ CLIENT_ID }}"
       - name: Run tests with pytest
         run: pytest
       - name: Check the git build status
