@@ -22,7 +22,7 @@ jobs:
           CLIENT_ID : ${{ secrets.CLIENT_ID }}
         run: |
           echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
-          echo "LM_URL"=${{ secrets.LM_URL }}" >> $GITHUB_ENV
+          echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
           echo SECRET_KEY: "$CLIENT_ID"
       - name: Run tests with pytest
         run: pytest
