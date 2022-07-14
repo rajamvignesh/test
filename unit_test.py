@@ -7,7 +7,7 @@ import json
 
 class Main_test_funct(unittest.TestCase):
 
-    Client_id = os.environ['CLIENT_ID']
+    Client_id = os.getenv['CLIENT_ID']
     @mock.patch('src.main_api')
     # ----------- Mock Env Variables ---------------
     @mock.patch.dict("os.environ", {
