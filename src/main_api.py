@@ -58,7 +58,7 @@ def process_lm_data():
         response = requests.request("GET", url=lm_dashboard_url, headers=headers)
         data = response.json()
         get_lm_res = data
-        print (get_lm_res)
+        # print (get_lm_res)
         logging.info(data)
         status_response = response.status_code
         logging.info(status_response)
