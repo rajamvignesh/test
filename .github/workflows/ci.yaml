@@ -20,6 +20,7 @@ jobs:
       - name: Get Env Variables
         run: |
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
+          echo "DASHBOARD_NAME=${{ secrets.DASHBOARD_NAME }}" >> $GITHUB_ENV
       - name: Run tests with pytest
         run: pytest
       - name: Check the git build status
