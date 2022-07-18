@@ -27,32 +27,32 @@ jobs:
         if: job.status == 'success'
         run: |
           echo "test case passed"
+          echo "${{ toJson(github) }}"
 
-
-  email_notification:
-    name: EMAIL TESTING
-    needs: build_and_test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: eu-smtp-outbound-1.mimecast.com
-          server_port: 25
-          username: airflow.awx@global.ntt
-          password: ${{ secrets.SMPT_PASSWORD }}
-          subject: TEST Mail from github action
-          body: Build job of ${{github.repository}} completed successfully!
-          html_body: |
-              <!DOCTYPE html>
-              <html>
-              <body>
-              <h1>Heading</h1>
-              <p>Paragraph</p>
-              </body>
-              </html>
-          to: vigneshraja.muruganantham@global.ntt
-          from: github-actions
-          ignore_cert: true
-          convert_markdown: true
-          priority: low
+  # email_notification:
+  #   name: EMAIL TESTING
+  #   needs: build_and_test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Send mail
+  #       uses: dawidd6/action-send-mail@v3
+  #       with:
+  #         server_address: eu-smtp-outbound-1.mimecast.com
+  #         server_port: 25
+  #         username: airflow.awx@global.ntt
+  #         password: ${{ secrets.SMPT_PASSWORD }}
+  #         subject: TEST Mail from github action
+  #         body: Build job of ${{github.repository}} completed successfully!
+  #         html_body: |
+  #             <!DOCTYPE html>
+  #             <html>
+  #             <body>
+  #             <h1>Heading</h1>
+  #             <p>Paragraph</p>
+  #             </body>
+  #             </html>
+  #         to: vigneshraja.muruganantham@global.ntt
+  #         from: github-actions
+  #         ignore_cert: true
+  #         convert_markdown: true
+  #         priority: low
