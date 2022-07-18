@@ -40,12 +40,10 @@ jobs:
         #   deploy_status_value: ${{ job.status }}
 
   output:
-    name: Output
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Try to get deploy status 
-      - run: |
+        run: |
           echo "$deploy_status_value"
           echo values --------- "${{jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value}}"
 
