@@ -31,15 +31,23 @@ jobs:
         id: Deploy_status
         run:  |
           echo Running File...
-          deploy_status_value = ${{ job.status }}
-          echo ::set-output name=deploy_status_value::$deploy_status_value
-          echo "$deploy_status_value"
+          echo = ${{ job.status }}
+
+
       - name: Dump steps context
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo "$STEPS_CONTEXT"
 
+
+          # echo "::set-output name=env_url::$ENV_URL"
+          # echo ::set-output name=deploy_status_value::$deploy_status_value
+          # echo "$deploy_status_value"
+
 # echo "${{ toJson(github) }}"
+
+
+
   # email_notification:
   #   name: EMAIL TESTING
   #   if: always()
