@@ -44,7 +44,6 @@ jobs:
     steps:
       - name: Try to get deploy status 
         run: |
-          echo "$deploy_status_value"
           echo values --------- "${{jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value}}"
 
       - name: Dump steps context
