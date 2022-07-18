@@ -31,7 +31,7 @@ jobs:
 
   email_notification:
     name: EMAIL TESTING
-    needs: build_and _test
+    needs: build_and_test
     runs-on: ubuntu-latest
     steps:
       - name: Send mail  
