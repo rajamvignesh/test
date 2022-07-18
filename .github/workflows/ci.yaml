@@ -95,32 +95,32 @@ jobs:
 #     - run: echo "${{ jobs.version_job.steps.version_step.outputs.version_number }}"
 
 
-  # email_notification:
-  #   name: EMAIL TESTING
-  #   if: always()
-  #   # needs: [job1, job2]
-  #   # needs: build_and_test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Send mail
-  #       uses: dawidd6/action-send-mail@v3
-  #       with:
-  #         server_address: eu-smtp-outbound-1.mimecast.com
-  #         server_port: 25
-  #         username: airflow.awx@global.ntt
-  #         password: ${{ secrets.SMPT_PASSWORD }}
-  #         subject: ${{ github.job }} job of ${{ github.repository }} has ${{ deploy_status_value }}
-  #         body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-  #         # html_body: |
-  #         #     <!DOCTYPE html>
-  #         #     <html>
-  #         #     <body>
-  #         #     <h2>Github Response</h2>
-  #         #     <p>Paragraph</p>
-  #         #     </body>
-  #         #     </html>
-  #         to: vigneshraja.muruganantham@global.ntt
-  #         from: github-actions
-  #         ignore_cert: true
-  #         convert_markdown: true
-  #         priority: low
+  email_notification:
+    name: EMAIL TESTING
+    if: always()
+    # needs: [job1, job2]
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: eu-smtp-outbound-1.mimecast.com
+          server_port: 25
+          username: airflow.awx@global.ntt
+          password: ${{ secrets.SMPT_PASSWORD }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          # html_body: |
+          #     <!DOCTYPE html>
+          #     <html>
+          #     <body>
+          #     <h2>Github Response</h2>
+          #     <p>Paragraph</p>
+          #     </body>
+          #     </html>
+          to: vigneshraja.muruganantham@global.ntt
+          from: github-actions
+          ignore_cert: true
+          convert_markdown: true
+          priority: low
