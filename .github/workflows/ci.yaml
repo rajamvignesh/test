@@ -35,10 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send mail
-        # uses: dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v3
         with:
-          server_address: "eu-smtp-outbound-1.mimecast.com"
-          server_port: 465
+          server_address: eu-smtp-outbound-1.mimecast.com
+          server_port: 25
           username: airflow.awx@global.ntt
           password: ${{ secrets.SMPT_PASSWORD }}
           subject: TEST Mail from github action
@@ -51,7 +51,8 @@ jobs:
               <p>Paragraph</p>
               </body>
               </html>
-          to: "vigneshraja.muruganantham@global.ntt"
+          to: vigneshraja.muruganantham@global.ntt
           from: github-actions
-          # convert_markdown: ${{matrix.convert_markdown}}
+          ignore_cert: true
+          convert_markdown: true
           priority: low
