@@ -27,12 +27,13 @@ jobs:
         if: job.status == 'success'
         run: |
           echo "test case passed"
-          # echo "${{ toJson(github) }}"
+          
     - name: Dump steps context
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "STEPS content ----- $STEPS_CONTEXT"
+      run: echo "$STEPS_CONTEXT"
 
+# echo "${{ toJson(github) }}"
   # email_notification:
   #   name: EMAIL TESTING
   #   if: always()
