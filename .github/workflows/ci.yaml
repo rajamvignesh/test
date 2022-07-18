@@ -28,14 +28,21 @@ jobs:
         run: |
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
           echo "DASHBOARD_NAME=${{ secrets.DASHBOARD_NAME }}" >> $GITHUB_ENV
+
       - name: Run tests with pytest
+        id: run_Unit_test_case
         run: pytest
 
       - name: Get Deploy status
         if: always()
         id: Deploy_status
         run: |
-          echo "::set-output name=deploy_status_value::${{ job.status }}"   
+          echo "::set-output name=deploy_status_value::${{ job.status }}"  
+
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo---------------- "$STEPS_CONTEXT" 
 
       # - name: Check the git build status
       #   if: job.status == 'success'
