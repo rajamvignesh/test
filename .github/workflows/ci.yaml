@@ -36,20 +36,18 @@ jobs:
       - name: Get Deploy status
         id: Deploy_status
         run: echo "::set-output name=deploy_status_value::${{ job.status }}"
-        # env:
-        #   deploy_status_value: ${{ job.status }}
 
-  output:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Try to get deploy status 
-        run: |
-          echo values --------- "${{jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value}}"
+  # output:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Try to get deploy status 
+  #       run: |
+  #         echo values --------- "${{ jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value }}"
 
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
+  #     - name: Dump steps context
+  #       env:
+  #         STEPS_CONTEXT: ${{ toJson(steps) }}
+  #       run: echo "$STEPS_CONTEXT"
 
 
           # echo "::set-output name=env_url::$ENV_URL"
