@@ -20,11 +20,12 @@ class Main_test_funct(unittest.TestCase):
         try:
             Dashboard_name = os.environ['DASHBOARD_NAME']
             Lm_process_data = webhook_lm.process_lm_data(Dashboard_name)
-            if webhook_lm.get_lm_response['status'] == 000:
-                print ("successfull response",webhook_lm.get_lm_response['status'])
-                pass
-            else:
-                raise Exception("LM API Not Connected.")
+            self.assertEqual(webhook_lm.get_lm_response['status'],000)
+            # if webhook_lm.get_lm_response['status'] == 000:
+            #     print ("successfull response",webhook_lm.get_lm_response['status'])
+            #     pass
+            # else:
+            #     raise Exception("LM API Not Connected.")
         except Exception as exception:
             raise
 

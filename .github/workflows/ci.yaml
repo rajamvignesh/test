@@ -31,16 +31,16 @@ jobs:
       - name: Run tests with pytest
         run: pytest
 
+      - name: Get Deploy status
+        if: always()
+        id: Deploy_status
+        run: |
+          echo "::set-output name=deploy_status_value::${{ job.status }}"   
+
       - name: Check the git build status
         if: job.status == 'success'
         run: |
-          echo "test case passed"
-
-      - name: Get Deploy status
-        id: Deploy_status
-
-        run: |
-          echo "::set-output name=deploy_status_value::${{ job.status }}"          
+          echo "test case passed"       
 
   output:
     runs-on: ubuntu-latest
