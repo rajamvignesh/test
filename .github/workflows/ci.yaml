@@ -43,6 +43,7 @@ jobs:
     name: Output
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Try to get deploy status 
       - run: |
           echo "$deploy_status_value"
