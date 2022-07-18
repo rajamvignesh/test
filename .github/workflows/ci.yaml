@@ -40,8 +40,9 @@ jobs:
         id: Deploy_status
 
         run: |
-          echoo "test case passed"
           echo "::set-output name=deploy_status_value::${{ job.status }}"
+          echoo "test case passed"
+          
 
 
   output:
@@ -112,16 +113,16 @@ jobs:
           server_port: 25
           username: airflow.awx@global.ntt
           password: ${{ secrets.SMPT_PASSWORD }}
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-          # html_body: |
-          #     <!DOCTYPE html>
-          #     <html>
-          #     <body>
-          #     <h2>Github Response</h2>
-          #     <p>Paragraph</p>
-          #     </body>
-          #     </html>
+          subject: $Deploy job of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+          body: $deploy job in of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+          html_body: |
+              <!DOCTYPE html>
+              <html>
+              <body>
+              <h2>Github Response</h2>
+              <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
+              </body>
+              </html>
           to: vigneshraja.muruganantham@global.ntt
           from: github-actions
           ignore_cert: true
