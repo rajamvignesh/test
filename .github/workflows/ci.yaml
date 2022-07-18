@@ -29,13 +29,12 @@ jobs:
           echo "test case passed"
 
 
-  Email_Notification:
+  Email Notification:
     name: EMAIL TESTING
     needs: build and test
     runs-on: ubuntu-latest
     steps:
       - name: Send mail  
-        
         run: |
           echo "email part"
         # with:
