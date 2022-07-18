@@ -28,10 +28,10 @@ jobs:
         run: |
           echo "test case passed"
           
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
 
 # echo "${{ toJson(github) }}"
   # email_notification:
