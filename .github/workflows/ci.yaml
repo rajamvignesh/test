@@ -29,7 +29,7 @@ jobs:
           echo "test case passed"
 
 
-  Email Notification:
+  email notification:
     name: EMAIL TESTING
     needs: build and test
     runs-on: ubuntu-latest
