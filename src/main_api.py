@@ -19,6 +19,29 @@ import azure.functions as func
 # myPassword=re.findall(r"(?<==).*",connStr[1])[0]
 
 
+# def get_data_from_redis(redis_dashboard_name):
+        
+#     r = redis.StrictRedis(host=myHostname, port=6380,password=myPassword, ssl=True)
+#     redis_data = r.get(redis_dashboard_name)
+#     if redis_data:
+#         logging.info(redis_data)
+#         return redis_data
+#     else:
+#         redis_data = ''
+#         return redis_data
+
+# def set_data_in_redis(dashboard_name, lm_dashboard_result):
+    
+#     redis_dashboard_name = dashboard_name + ' Availability Issue Report'
+
+#     r = redis.StrictRedis(host=myHostname, port=6380,password=myPassword, ssl=True)
+#     time_to_expire_s=3600
+
+#     result = r.set(redis_dashboard_name, lm_dashboard_result, ex=time_to_expire_s)
+#     logging.info("Data stored in redis")
+#     logging.info(result)
+
+
 def generate_token(resource_path):
     try:
         access_id = os.environ.get('LMAccessId')
