@@ -30,17 +30,17 @@ jobs:
         run: |
           echo "test case passed"
 
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-
       - name: Get Deploy status
         id: Deploy_status
         env:
           deploy_status_value: ${{ job.status }}
+        run: echo "$deploy_status_value"
 
 
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
 
 
           # echo "::set-output name=env_url::$ENV_URL"
