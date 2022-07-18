@@ -30,10 +30,12 @@ jobs:
 
 
   Email_Notification:
+    name: EMAIL TESTING
+    needs: build and test
     runs-on: ubuntu-latest
     steps:
       - name: Send mail  
-        needs: build and test
+        
         run: |
           echo "email part"
         # with:
