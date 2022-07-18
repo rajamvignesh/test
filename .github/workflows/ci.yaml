@@ -29,7 +29,9 @@ jobs:
           echo "test case passed"
 
 
-  Email_Notification:   
+  Email_Notification:
+    runs-on: ubuntu-latest
+    steps:  
       - name: Send mail
         uses: actions/send-email
         with:
