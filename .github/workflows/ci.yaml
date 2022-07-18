@@ -27,7 +27,13 @@ jobs:
         if: job.status == 'success'
         run: |
           echo "test case passed"
-          
+      - name: Get Deploy status
+        id: Deploy status
+        run:  |
+          echo Running File...
+          deploy_status = ${{ job.status }}
+          echo ::set-output name=deploy_status::$deploy_status
+          echo "$deploy_status"
       - name: Dump steps context
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
