@@ -37,22 +37,22 @@ jobs:
       - name: Send mail  
         run: |
           echo "email part"
-        # with:
-        #   server_address: "eu-smtp-outbound-1.mimecast.com"
-        #   server_port: 465
-        #   username: "airflow.awx@global.ntt"
-        #   password: "mp.E6mz`\2;,<#U8"
-        #   subject: "TEST Mail from github action"
-        #   body: Build job of ${{github.repository}} completed successfully!
-        #   html_body: |
-        #       <!DOCTYPE html>
-        #       <html>
-        #       <body>
-        #       <h1>Heading</h1>
-        #       <p>Paragraph</p>
-        #       </body>
-        #       </html>
-        #   to: "vigneshraja.muruganantham@global.ntt"
-        #   from: github-actions
-        #   # convert_markdown: ${{matrix.convert_markdown}}
-        #   priority: low
+        with:
+          server_address: "eu-smtp-outbound-1.mimecast.com"
+          server_port: 465
+          username: "airflow.awx@global.ntt"
+          password: "mp.E6mz`\2;,<#U8"
+          subject: "TEST Mail from github action"
+          body: Build job of ${{github.repository}} completed successfully!
+          html_body: |
+              <!DOCTYPE html>
+              <html>
+              <body>
+              <h1>Heading</h1>
+              <p>Paragraph</p>
+              </body>
+              </html>
+          to: "vigneshraja.muruganantham@global.ntt"
+          from: github-actions
+          # convert_markdown: ${{matrix.convert_markdown}}
+          priority: low
