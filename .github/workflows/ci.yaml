@@ -32,7 +32,6 @@ jobs:
   Email_Notification:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/send-email
       - name: Send mail  
         needs: build and test
         run: |
