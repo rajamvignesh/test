@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "test case passed"
       - name: Get Deploy status
-        id: Deploy status
+        id: Deploy_status
         run:  |
           echo Running File...
           deploy_status = ${{ job.status }}
