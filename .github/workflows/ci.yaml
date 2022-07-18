@@ -39,13 +39,14 @@ jobs:
         # env:
         #   deploy_status_value: ${{ job.status }}
 
-    output:
-      name: Output
-      runs-on: ubuntu-latest
-      steps:
-        - run: |
-            echo "$deploy_status_value"
-            echo values --------- "${{jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value}}"
+  output:
+    name: Output
+    runs-on: ubuntu-latest
+    steps:
+      - name: Try to get deploy status 
+      - run: |
+          echo "$deploy_status_value"
+          echo values --------- "${{jobs.build_and_test.steps.Deploy_status.outputs.deploy_status_value}}"
 
       - name: Dump steps context
         env:
