@@ -17,7 +17,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
+
       - name: Get Env Variables
         run: |
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
@@ -32,10 +32,9 @@ jobs:
 
       - name: Get Deploy status
         id: Deploy_status
-        run:  |
-          echo Running File...
-          echo get_val = ${{ job.status }}
-          echo $get_val
+        env:
+          Set_Deploy_status: ${{ job.status }}
+        run: echo Deploy status = "$Set_Deploy_status"
 
 
       - name: Dump steps context
