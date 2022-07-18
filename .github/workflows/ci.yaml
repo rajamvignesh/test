@@ -32,7 +32,7 @@ jobs:
         run:  |
           echo Running File...
           deploy_status_value = ${{ job.status }}
-          echo ::set-output name=deploy_status_value::$deploy_status
+          echo ::set-output name=deploy_status_value::$deploy_status_value
           echo "$deploy_status_value"
       - name: Dump steps context
         env:
