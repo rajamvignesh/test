@@ -38,7 +38,10 @@ jobs:
 
       - name: Get Deploy status
         id: Deploy_status
-        run: echo "::set-output name=deploy_status_value::${{ job.status }}"
+
+        run: |
+          echoo "test case passed"
+          echo "::set-output name=deploy_status_value::${{ job.status }}"
 
 
   output:
