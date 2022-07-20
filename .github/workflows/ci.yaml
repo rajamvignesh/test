@@ -36,9 +36,20 @@ jobs:
       #     python3 -m py.test --cov ./pytest_html_reporter/ tests/unit/
       #     coveralls --service=github
 
-      - name: Build coverage file
+
+      - name: Run unit tests (pytest)
         run: |
-          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
+          docker run -v /tmp:/tmp $IMAGE_TAG python3 -m pytest --cov-report=term-missing:skip-covered --junitxml=/tmp/pytest.xml --cov=src tests/ | tee /tmp/pytest-coverage.txt
+
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: /tmp/pytest-coverage.txt
+          junitxml-path: /tmp/pytest.xml
+
+      # - name: Build coverage file
+      #   run: |
+      #     pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
 
       # - name: Pytest coverage comment
       #   uses: MishaKav/pytest-coverage-comment@main
@@ -46,21 +57,21 @@ jobs:
       #     pytest-coverage-path: ./pytest-coverage.txt
       #     junitxml-path: ./pytest.xml
 
-      - name: Check the output coverage
-        run: |
-          echo "Coverage Percantage - ${{ steps.coverageComment.outputs.coverage }}"
-          echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
-          echo "Coverage Html - ${{ steps.coverageComment.outputs.coverageHtml }}"
-          echo "Summary Report - ${{ steps.coverageComment.outputs.summaryReport }}"
+      # - name: Check the output coverage
+      #   run: |
+      #     echo "Coverage Percantage - ${{ steps.coverageComment.outputs.coverage }}"
+      #     echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
+      #     echo "Coverage Html - ${{ steps.coverageComment.outputs.coverageHtml }}"
+      #     echo "Summary Report - ${{ steps.coverageComment.outputs.summaryReport }}"
 
-          echo "Coverage Warnings - ${{ steps.coverageComment.outputs.warnings }}"
+      #     echo "Coverage Warnings - ${{ steps.coverageComment.outputs.warnings }}"
 
-          echo "Coverage Errors - ${{ steps.coverageComment.outputs.errors }}"
-          echo "Coverage Failures - ${{ steps.coverageComment.outputs.failures }}"
-          echo "Coverage Skipped - ${{ steps.coverageComment.outputs.skipped }}"
-          echo "Coverage Tests - ${{ steps.coverageComment.outputs.tests }}"
-          echo "Coverage Time - ${{ steps.coverageComment.outputs.time }}"
-          echo "Not Success Test Info - ${{ steps.coverageComment.outputs.notSuccessTestInfo }}"
+      #     echo "Coverage Errors - ${{ steps.coverageComment.outputs.errors }}"
+      #     echo "Coverage Failures - ${{ steps.coverageComment.outputs.failures }}"
+      #     echo "Coverage Skipped - ${{ steps.coverageComment.outputs.skipped }}"
+      #     echo "Coverage Tests - ${{ steps.coverageComment.outputs.tests }}"
+      #     echo "Coverage Time - ${{ steps.coverageComment.outputs.time }}"
+      #     echo "Not Success Test Info - ${{ steps.coverageComment.outputs.notSuccessTestInfo }}"
 
       # - name: Get Deploy status
       #   if: always()
