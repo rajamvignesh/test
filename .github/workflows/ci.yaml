@@ -30,12 +30,12 @@ jobs:
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
           echo "DASHBOARD_NAME=${{ secrets.DASHBOARD_NAME }}" >> $GITHUB_ENV
 
-      # - name: Run tests with pytest
-      #   id: run_Unit_test_case
-      #   run: |
-      #     python3 -m py.test --cov ./pytest_html_reporter/ tests/unit/
-      #     coveralls --service=github
-
+      - name: Pytest coverage comment
+        id: coverageComment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          hide-comment: true
+          pytest-coverage-path: ./data/pytest-coverage_4.txt
 
       - name: Run unit tests (pytest)
         run: |
@@ -57,21 +57,21 @@ jobs:
       #     pytest-coverage-path: ./pytest-coverage.txt
       #     junitxml-path: ./pytest.xml
 
-      # - name: Check the output coverage
-      #   run: |
-      #     echo "Coverage Percantage - ${{ steps.coverageComment.outputs.coverage }}"
-      #     echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
-      #     echo "Coverage Html - ${{ steps.coverageComment.outputs.coverageHtml }}"
-      #     echo "Summary Report - ${{ steps.coverageComment.outputs.summaryReport }}"
+      - name: Check the output coverage
+        run: |
+          echo "Coverage Percantage - ${{ steps.coverageComment.outputs.coverage }}"
+          echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
+          echo "Coverage Html - ${{ steps.coverageComment.outputs.coverageHtml }}"
+          echo "Summary Report - ${{ steps.coverageComment.outputs.summaryReport }}"
 
-      #     echo "Coverage Warnings - ${{ steps.coverageComment.outputs.warnings }}"
+          echo "Coverage Warnings - ${{ steps.coverageComment.outputs.warnings }}"
 
-      #     echo "Coverage Errors - ${{ steps.coverageComment.outputs.errors }}"
-      #     echo "Coverage Failures - ${{ steps.coverageComment.outputs.failures }}"
-      #     echo "Coverage Skipped - ${{ steps.coverageComment.outputs.skipped }}"
-      #     echo "Coverage Tests - ${{ steps.coverageComment.outputs.tests }}"
-      #     echo "Coverage Time - ${{ steps.coverageComment.outputs.time }}"
-      #     echo "Not Success Test Info - ${{ steps.coverageComment.outputs.notSuccessTestInfo }}"
+          echo "Coverage Errors - ${{ steps.coverageComment.outputs.errors }}"
+          echo "Coverage Failures - ${{ steps.coverageComment.outputs.failures }}"
+          echo "Coverage Skipped - ${{ steps.coverageComment.outputs.skipped }}"
+          echo "Coverage Tests - ${{ steps.coverageComment.outputs.tests }}"
+          echo "Coverage Time - ${{ steps.coverageComment.outputs.time }}"
+          echo "Not Success Test Info - ${{ steps.coverageComment.outputs.notSuccessTestInfo }}"
 
       # - name: Get Deploy status
       #   if: always()
