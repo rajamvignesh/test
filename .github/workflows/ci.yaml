@@ -32,9 +32,9 @@ jobs:
 
       - name: Build coverage file
         run: |
-          pytest
-          pytest -v --junitxml="result.xml"
-          pytest --html=report.html
+          pytest 
+          pytest -v --junitxml=./result.xml
+          pytest --html=./report.html
 
       - name: Comment coverage
         uses: coroo/pytest-coverage-commentator@v1.0.2
