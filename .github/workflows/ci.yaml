@@ -35,6 +35,7 @@ jobs:
           pytest 
           pytest -v --junitxml=./result.xml
           pytest --html=./report.html
+          pytest -v --junitxml=C:\personal\test\result.xml
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
