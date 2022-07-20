@@ -36,14 +36,14 @@ jobs:
 
       - name: Build coverage file
         run: |
-          pytest --cov=app tests/ | tee pytest-coverage.txt
+          python3 -m pytest --cov-report term --cov-report xml:coverage.xml --cov=test
 
       - name: Comment coverage
         uses: coroo/pytest-coverage-commentator@v1.0.2
 
-        - name: Build coverage file
-          run: |
-            pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
+        # - name: Build coverage file
+        #   run: |
+        #     pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
 
       # - name: Generate Report
       #   run: |
