@@ -30,13 +30,10 @@ jobs:
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
           echo "DASHBOARD_NAME=${{ secrets.DASHBOARD_NAME }}" >> $GITHUB_ENV
 
-      # - name: Run unit tests (pytest)
-      #   run: |
-      #     docker run -v /tmp:/tmp $IMAGE_TAG python3 -m pytest --cov-report=term-missing:skip-covered --junitxml=/tmp/pytest.xml --cov=src tests/ | tee /tmp/pytest-coverage.txt
-
       - name: Build coverage file
         run: |
-          coverage run -m pytest
+          pytest
+          pytest -v --junitxml="result.xml"
 
       - name: Comment coverage
         uses: coroo/pytest-coverage-commentator@v1.0.2
