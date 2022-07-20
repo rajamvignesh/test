@@ -30,16 +30,9 @@ jobs:
           echo "LM_URL=${{ secrets.LM_URL }}" >> $GITHUB_ENV
           echo "DASHBOARD_NAME=${{ secrets.DASHBOARD_NAME }}" >> $GITHUB_ENV
 
-      - name: Pytest coverage comment
-        id: coverageComment
-        uses: MishaKav/pytest-coverage-comment@main
-        with:
-          hide-comment: true
-          pytest-coverage-path: ./data/pytest-coverage_4.txt
-
-      - name: Run unit tests (pytest)
-        run: |
-          docker run -v /tmp:/tmp $IMAGE_TAG python3 -m pytest --cov-report=term-missing:skip-covered --junitxml=/tmp/pytest.xml --cov=src tests/ | tee /tmp/pytest-coverage.txt
+      # - name: Run unit tests (pytest)
+      #   run: |
+      #     docker run -v /tmp:/tmp $IMAGE_TAG python3 -m pytest --cov-report=term-missing:skip-covered --junitxml=/tmp/pytest.xml --cov=src tests/ | tee /tmp/pytest-coverage.txt
 
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
@@ -47,9 +40,16 @@ jobs:
           pytest-coverage-path: /tmp/pytest-coverage.txt
           junitxml-path: /tmp/pytest.xml
 
-      # - name: Build coverage file
-      #   run: |
-      #     pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
+      - name: Pytest coverage comment try
+        id: coverageComment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          hide-comment: true
+          pytest-coverage-path: ./data/pytest-coverage_4.txt
+
+      - name: Build coverage file
+        run: |
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
 
       # - name: Pytest coverage comment
       #   uses: MishaKav/pytest-coverage-comment@main
