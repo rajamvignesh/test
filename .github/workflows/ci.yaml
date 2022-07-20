@@ -31,52 +31,54 @@ jobs:
 
       - name: Run tests with pytest
         id: run_Unit_test_case
-        run: pytest
-
-      - name: Get Deploy status
-        if: always()
-        id: Deploy_status
         run: |
-          echo "::set-output name=deploy_status_value::${{ job.status }}"  
+          python3 -m py.test --cov ./pytest_html_reporter/ tests/unit/
+          coveralls --service=github
 
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo---------------- "$STEPS_CONTEXT" 
+      # - name: Get Deploy status
+      #   if: always()
+      #   id: Deploy_status
+      #   run: |
+      #     echo "::set-output name=deploy_status_value::${{ job.status }}"  
+
+      # - name: Dump steps context
+      #   env:
+      #     STEPS_CONTEXT: ${{ toJson(steps) }}
+      #   run: echo---------------- "$STEPS_CONTEXT" 
 
       # - name: Check the git build status
       #   if: job.status == 'success'
       #   run: |
       #     echo "test case passed"    
 
-  email_notification:
-    name: EMAIL TESTING
-    if: always()
-    needs: build_and_test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: eu-smtp-outbound-1.mimecast.com
-          server_port: 25
-          username: airflow.awx@global.ntt
-          password: ${{ secrets.SMPT_PASSWORD }}
-          subject: Deployment of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
-          body: Deployment job in of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
-          html_body: |
-              <!DOCTYPE html>
-              <html>
-              <body>
-              <h2>Message from Github Action</h2>
-              <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
-              </body>
-              </html>
-          to: vigneshraja.muruganantham@global.ntt
-          from: github-actions
-          ignore_cert: true
-          convert_markdown: true
-          priority: low   
+  # email_notification:
+  #   name: EMAIL TESTING
+  #   if: always()
+  #   needs: build_and_test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Send mail
+  #       uses: dawidd6/action-send-mail@v3
+  #       with:
+  #         server_address: eu-smtp-outbound-1.mimecast.com
+  #         server_port: 25
+  #         username: airflow.awx@global.ntt
+  #         password: ${{ secrets.SMPT_PASSWORD }}
+  #         subject: Deployment of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+  #         body: Deployment job in of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+  #         html_body: |
+  #             <!DOCTYPE html>
+  #             <html>
+  #             <body>
+  #             <h2>Message from Github Action</h2>
+  #             <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
+  #             </body>
+  #             </html>
+  #         to: vigneshraja.muruganantham@global.ntt
+  #         from: github-actions
+  #         ignore_cert: true
+  #         convert_markdown: true
+  #         priority: low   
 
   # output:
   #   runs-on: ubuntu-latest
