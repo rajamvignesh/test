@@ -34,15 +34,15 @@ jobs:
       #   run: |
       #     docker run -v /tmp:/tmp $IMAGE_TAG python3 -m pytest --cov-report=term-missing:skip-covered --junitxml=/tmp/pytest.xml --cov=src tests/ | tee /tmp/pytest-coverage.txt
 
-    - name: Build coverage file
-      run: |
-        pytest --cache-clear --cov=app test/ > pytest-coverage.txt
-    - name: Comment coverage
-      uses: coroo/pytest-coverage-commentator@v1.0.2
-
       - name: Build coverage file
         run: |
-          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
+          pytest --cache-clear --cov=app test/ > pytest-coverage.txt
+      - name: Comment coverage
+        uses: coroo/pytest-coverage-commentator@v1.0.2
+
+        - name: Build coverage file
+          run: |
+            pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
 
       # - name: Generate Report
       #   run: |
