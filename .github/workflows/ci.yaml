@@ -73,34 +73,35 @@ jobs:
       #   run: |
       #     echo "test case passed"    
 
-  # email_notification:
-  #   name: EMAIL TESTING
-  #   if: always()
-  #   needs: build_and_test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Send mail
-  #       uses: dawidd6/action-send-mail@v3
-  #       with:
-  #         server_address: eu-smtp-outbound-1.mimecast.com
-  #         server_port: 25
-  #         username: airflow.awx@global.ntt
-  #         password: ${{ secrets.SMPT_PASSWORD }}
-  #         subject: Deployment of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
-  #         body: Deployment job in of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
-  #         html_body: |
-  #             <!DOCTYPE html>
-  #             <html>
-  #             <body>
-  #             <h2>Message from Github Action</h2>
-  #             <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
-  #             </body>
-  #             </html>
-  #         to: vigneshraja.muruganantham@global.ntt
-  #         from: github-actions
-  #         ignore_cert: true
-  #         convert_markdown: true
-  #         priority: low   
+  email_notification:
+    name: EMAIL TESTING
+    if: always()
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: eu-smtp-outbound-1.mimecast.com
+          server_port: 25
+          username: airflow.awx@global.ntt
+          password: ${{ secrets.SMPT_PASSWORD }}
+          subject: Deployment of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+          body: Deployment job in of ${{ github.repository }} has ${{ needs.build_and_test.outputs.deploty_status_val }}
+          html_body: |
+              <!DOCTYPE html>
+              <html>
+              <body>
+              <h2>Message from Github Action</h2>
+              <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
+              </body>
+              </html>
+          attachments: home/runner/work/test/test/report.html
+          to: vigneshraja.muruganantham@global.ntt
+          from: github-actions
+          ignore_cert: true
+          convert_markdown: true
+          priority: low   
 
   # output:
   #   runs-on: ubuntu-latest
