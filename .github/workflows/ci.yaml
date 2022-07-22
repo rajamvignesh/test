@@ -96,7 +96,7 @@ jobs:
               <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
               </body>
               </html>
-          attachments: file://README.md
+          attachments: ./*.md
           to: vigneshraja.muruganantham@global.ntt
           from: github-actions
           # ignore_cert: true
