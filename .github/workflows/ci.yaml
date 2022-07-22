@@ -96,12 +96,11 @@ jobs:
               <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
               </body>
               </html>
-          attachments: ./*.md
+          attachments: README.md
           to: vigneshraja.muruganantham@global.ntt
           from: github-actions
-          # ignore_cert: true
-          # convert_markdown: true
-          # priority: low   
+          convert_markdown: true
+          priority: high   
 
   # output:
   #   runs-on: ubuntu-latest
