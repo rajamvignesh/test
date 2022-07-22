@@ -57,11 +57,11 @@ jobs:
       # - name: Upload Coverage to Codecov
       #   uses: codecov/codecov-action@v2
 
-      # - name: Get Deploy status
-      #   if: always()
-      #   id: Deploy_status
-      #   run: |
-      #     echo "::set-output name=deploy_status_value::${{ job.status }}"  
+      - name: Get Deploy status
+        if: always()
+        id: Deploy_status
+        run: |
+          echo "::set-output name=deploy_status_value::${{ job.status }}"  
 
       # - name: Dump steps context
       #   env:
@@ -96,7 +96,7 @@ jobs:
               <p>Deployment Status : ${{ needs.build_and_test.outputs.deploty_status_val }} </p>
               </body>
               </html>
-          attachments: "home/runner/work/test/test/report.html"
+          attachments: '[{"path":"README.md"}]'
           to: vigneshraja.muruganantham@global.ntt
           from: github-actions
           ignore_cert: true
