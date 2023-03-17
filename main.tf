@@ -13,17 +13,21 @@ provider "aws" {
   region  = "ap-south-1"           # mumbai region
 }
 
-resource "aws_db_instance" "rds_instance" {
+resource "aws_instance" "vm-web" {
+  ami           = "ami-0557a15b87f6559cf"
+  instance_type = "t2.micro"
+  key_name = "auto-server-tf"
+  count = "3"
 
-    engine = "mysql"
-    engine_version = "8.0.27"
-    identifier = "rds-terraform"
-    instance_class = "db.t2.micro" 
-    storage_type = "gp2"
-    allocated_storage = 5
-    max_allocated_storage = 10 
-    name = "test"
-    username = "admin"
-    password = "admin"
-    
+  root_block_device {
+    delete_on_termination = true
+    iops = 150
+    volume_size = 50
+    volume_type = "gp2"
+  }
+
+  tags = {
+    Name = "server for web"
+    Env = "dev"
+  }
 }
