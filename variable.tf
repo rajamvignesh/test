@@ -1,3 +1,8 @@
+variable "region" {
+ type = string
+ description = "aws region"
+}
+
 variable "instance_type" {
  type = string
  default = "t2.micro"
@@ -9,7 +14,7 @@ variable "ami_id" {
  description = "AMI instance id"
 }
 
-variable "region" {
+variable "security_grp" {
  type = string
  description = "aws region"
 }

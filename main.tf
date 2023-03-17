@@ -8,7 +8,6 @@ terraform {
 }
 
 
-
 provider "aws" {
   profile = "default"
   region  = var.region
@@ -17,18 +16,17 @@ provider "aws" {
 resource "aws_instance" "auto_deploy_server" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  key_name = "auto-server-tf"
+  key_name = "auto-key-pair"
   count = "1"
 
   root_block_device {
     delete_on_termination = true
-    iops = 100
     volume_size = 50
     volume_type = "gp2"
   }
 
   vpc_security_group_ids = [
-    "sg-04a7bbd1910030844"
+    var.security_grp
   ]
 
   user_data = <<EOF
