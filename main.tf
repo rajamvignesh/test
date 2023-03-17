@@ -25,9 +25,9 @@ resource "aws_instance" "auto_deploy_server" {
     volume_type = "gp2"
   }
 
-  vpc_security_group_ids = [
-    var.security_grp
-  ]
+  # vpc_security_group_ids = [
+  #   var.security_grp
+  # ]
 
   user_data = <<EOF
       #!/bin/bash
