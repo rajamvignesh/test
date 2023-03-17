@@ -13,11 +13,39 @@ provider "aws" {
   region  = var.region
 }
 
+resource "aws_security_group" "demo-sg" {
+  name = “sec-grp”
+  description = "Allow HTTP and SSH traffic via Terraform"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_instance" "auto_deploy_server" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  key_name = "auto-key-pair"
+  key_name = "terraform-dev-server"
   count = "1"
+  ecs_associate_public_ip_address = "false"
+
 
   root_block_device {
     delete_on_termination = true
@@ -29,16 +57,14 @@ resource "aws_instance" "auto_deploy_server" {
   #   var.security_grp
   # ]
 
-  user_data = <<EOF
-      #!/bin/bash
-      echo "Copying the SSH Key Of Jenkins to the server"
-      echo "Changing Hostname"
-      EOF
+  user_data = "${file(“userdata.sh”)}"
 
   depends_on = [ var.security_grp ]
 
   tags = {
-    Name = "server for web"
-    Env = "dev"
+    Name = "Test Web Server"
+    BU = "Project Name"
+    App-Name = "Project Name"
+    Project = "Project Name"
   }
 }
