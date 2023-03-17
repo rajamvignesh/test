@@ -1,3 +1,25 @@
+variable "instance_type" {
+ type = string
+ default = "t2.micro"
+ description = "EC2 instance type"
+}
+
+variable "ami_id" {
+ type = string
+ description = "AMI instance id"
+}
+
+variable "region" {
+ type = string
+ description = "aws region"
+}
+
+variable "security_grp" {
+ type = string
+ description = "aws region"
+}
+
+
 terraform {
   required_providers {
     aws = {
@@ -6,6 +28,7 @@ terraform {
     }
   }
 }
+
 
 
 provider "aws" {
@@ -35,7 +58,7 @@ resource "aws_instance" "auto_deploy_server" {
       echo "Copying the SSH Key Of Jenkins to the server"
       echo "Changing Hostname"
       EOF
-      
+
   depends_on = [ var.security_grp ]
 
   tags = {
