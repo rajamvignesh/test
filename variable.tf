@@ -18,8 +18,3 @@ variable "security_grp" {
  type = string
  description = "aws region"
 }
-
-variable "security_grp" {
- type = string
- description = "aws region"
-}
