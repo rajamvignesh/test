@@ -13,8 +13,8 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_security_group" "demo-sg" {
-  name = “sec-grp”
+resource "aws_security_group" "${var.server_name}_sg" {
+  name = "sec-grp"
   description = "Allow HTTP and SSH traffic via Terraform"
 
   ingress {
@@ -39,6 +39,15 @@ resource "aws_security_group" "demo-sg" {
   }
 }
 
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.0"
+    }
+  }
+}
+
 
 resource "aws_instance" "auto_deploy_server" {
   ami           = var.ami_id
@@ -54,9 +63,9 @@ resource "aws_instance" "auto_deploy_server" {
     volume_type = "gp2"
   }
 
-  # vpc_security_group_ids = [
-  #   var.security_grp
-  # ]
+  vpc_security_group_ids = [
+    var.security_grp
+  ]
 
   user_data = "${file(“userdata.sh”)}"
 
