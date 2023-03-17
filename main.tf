@@ -13,7 +13,7 @@ provider "aws" {
   region  = "ap-south-1"           # mumbai region
 }
 
-resource "aws_instance" "vm-web" {
+resource "aws_instance" "auto_deploy_server" {
   ami           = "ami-0557a15b87f6559cf"
   instance_type = "t2.micro"
   key_name = "auto-server-tf"
@@ -34,5 +34,5 @@ resource "aws_instance" "vm-web" {
 
 
 output "ec2instance" {
-  value = aws_instance.project-iac.public_ip
+  value = aws_instance.auto_deploy_server.public_ip
 }
