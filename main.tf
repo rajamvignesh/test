@@ -1,4 +1,3 @@
-# standard syntax
 terraform {
   required_providers {
     aws = {
@@ -10,7 +9,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "ap-south-1"           # mumbai region
+  region  = "ap-south-1"
 }
 
 resource "aws_instance" "auto_deploy_server" {
@@ -30,9 +29,4 @@ resource "aws_instance" "auto_deploy_server" {
     Name = "server for web"
     Env = "dev"
   }
-}
-
-
-output "ec2instance" {
-  value = aws_instance.auto_deploy_server.public_ip
 }
