@@ -31,3 +31,8 @@ resource "aws_instance" "vm-web" {
     Env = "dev"
   }
 }
+
+
+output "ec2instance" {
+  value = aws_instance.project-iac.public_ip
+}
