@@ -12,7 +12,7 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_security_group" "${var.server_name}_sg" {
+resource "aws_security_group" "test_sg" {
   name = "sec-grp"
   description = "Allow HTTP and SSH traffic via Terraform"
 
@@ -42,9 +42,9 @@ resource "aws_instance" "auto_deploy_server" {
       ami           = var.ami_id
       instance_type = var.instance_type
       key_name = "terraform-dev-server"
-      count = "1"
-      ecs_associate_public_ip_address = "false"
-
+      count = 1
+      #ecs_associate_public_ip_address = "false"
+      tenancy = "default"
 
       root_block_device {
         delete_on_termination = true
