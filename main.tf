@@ -50,6 +50,7 @@ resource "aws_instance" "auto_deploy_server" {
         delete_on_termination = true
         volume_size = 50
         volume_type = "gp2"
+        encrypted   = true
       }
 
       vpc_security_group_ids = [
