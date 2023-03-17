@@ -7,23 +7,36 @@ terraform {
   }
 }
 
+
 provider "aws" {
   profile = "default"
-  region  = "ap-south-1"
+  region  = var.region
 }
 
 resource "aws_instance" "auto_deploy_server" {
-  ami           = "ami-0557a15b87f6559cf"
-  instance_type = "t2.micro"
+  ami           = var.ami_id
+  instance_type = var.instance_type
   key_name = "auto-server-tf"
-  count = "3"
+  count = "1"
 
   root_block_device {
     delete_on_termination = true
-    iops = 150
+    iops = 100
     volume_size = 50
     volume_type = "gp2"
   }
+
+  vpc_security_group_ids = [
+    "sg-04a7bbd1910030844"
+  ]
+
+  user_data = <<EOF
+      #!/bin/bash
+      echo "Copying the SSH Key Of Jenkins to the server"
+      echo "Changing Hostname"
+      EOF
+      
+  depends_on = [ var.security_grp ]
 
   tags = {
     Name = "server for web"
