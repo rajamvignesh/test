@@ -18,16 +18,16 @@ resource "aws_security_group" "demo-sg" {
   description = "Allow HTTP and SSH traffic via Terraform"
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "ssh"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port   = 402
+    to_port     = 402
+    protocol    = "ssh"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -38,6 +38,7 @@ resource "aws_security_group" "demo-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 
 resource "aws_instance" "auto_deploy_server" {
   ami           = var.ami_id
@@ -62,7 +63,7 @@ resource "aws_instance" "auto_deploy_server" {
   depends_on = [ var.security_grp ]
 
   tags = {
-    Name = "Test Web Server"
+    Name = var.server_name
     BU = "Project Name"
     App-Name = "Project Name"
     Project = "Project Name"

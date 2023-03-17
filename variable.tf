@@ -18,3 +18,9 @@ variable "security_grp" {
  type = string
  description = "aws region"
 }
+
+variable "server_name" {
+ type = string
+ default = "Test Web Server"
+ description = "aws region"
+}
