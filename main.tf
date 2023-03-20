@@ -39,11 +39,11 @@ resource "aws_security_group" "auto-created-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  tags = {
-    Name = var.server_name
+
+  tags ={
+    Name = "${var.server_name}-SG"
   }
 }
-
 resource "aws_instance" "auto_deploy_server" {
   ami           = var.ami_id
   instance_type = var.instance_type
