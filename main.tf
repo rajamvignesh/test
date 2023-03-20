@@ -59,7 +59,6 @@ resource "aws_instance" "auto_deploy_server" {
   security_groups = ["auto-created-sg"]
   user_data = "${file("userdata.sh")}"
 
-  depends_on = [ "auto-created-sg" ]
 
   tags = {
       Name = var.server_name
