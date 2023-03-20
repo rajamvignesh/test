@@ -48,6 +48,7 @@ resource "aws_instance" "auto_deploy_server" {
   count = 1
   #ecs_associate_public_ip_address = "false"
   tenancy = "default"
+  monitoring = true
 
   root_block_device {
     delete_on_termination = true
