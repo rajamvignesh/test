@@ -14,11 +14,6 @@ variable "ami_id" {
  description = "AMI instance id"
 }
 
-variable "security_grp" {
- type = string
- description = "aws region"
-}
-
 variable "server_name" {
  type = string
  default = "Test Web Server"

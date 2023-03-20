@@ -39,6 +39,9 @@ resource "aws_security_group" "auto-created-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = var.server_name
+  }
 }
 
 resource "aws_instance" "auto_deploy_server" {
