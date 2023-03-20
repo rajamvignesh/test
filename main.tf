@@ -49,13 +49,12 @@ resource "aws_instance" "auto_deploy_server" {
   instance_type = var.instance_type
   key_name = "terraform-dev-server"
   count = 1
-  #ecs_associate_public_ip_address = "false"
   tenancy = "default"
   monitoring = true
 
   root_block_device {
     delete_on_termination = true
-    volume_size = 50
+    volume_size = 20
     volume_type = "gp2"
     encrypted   = true
   }
