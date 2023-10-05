@@ -1,0 +1,209 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "coluatapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "coluatapp"
+  template:
+    metadata:
+      labels:
+        app: "coluatapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/colenduat:colenduat_start.154
+          imagePullPolicy: Always
+          name: "coluatapp"
+          ports:
+            - containerPort: 8000
+              name: coluatapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "psapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "psapp"
+  template:
+    metadata:
+      labels:
+        app: "psapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/lvpartner:psuat_start.162
+          imagePullPolicy: Always
+          name: "psapp"
+          ports:
+            - containerPort: 8000
+              name: psapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mtapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "mtapp"
+  template:
+    metadata:
+      labels:
+        app: "mtapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/lvpartner:moneytapuat_start.181
+          imagePullPolicy: Always
+          name: "mtapp"
+          ports:
+            - containerPort: 8000
+              name: mtapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "mvapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "mvapp"
+  template:
+    metadata:
+      labels:
+        app: "mvapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/lvpartner:moneyviewuat.42
+          imagePullPolicy: Always
+          name: "mvapp"
+          ports:
+            - containerPort: 8000
+              name: mvapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "lkapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "lkapp"
+  template:
+    metadata:
+      labels:
+        app: "lkapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/lvpartner:lkuat_start.165
+          imagePullPolicy: Always
+          name: "lkapp"
+          ports:
+            - containerPort: 8000
+              name: lkapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "naviapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "naviapp"
+  template:
+    metadata:
+      labels:
+        app: "naviapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/navi:naviuat_start.163
+          imagePullPolicy: Always
+          name: "naviapp"
+          ports:
+            - containerPort: 8000
+              name: naviapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "sfapp-deployment"
+  namespace: "lvpartners"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "sfapp"
+  template:
+    metadata:
+      labels:
+        app: "sfapp"
+    spec:
+      containers:
+        - image: 016900471114.dkr.ecr.ap-south-1.amazonaws.com/lvpartner:sfuat_start.172
+          imagePullPolicy: Always
+          name: "sfapp"
+          ports:
+            - containerPort: 8000
+              name: sfapp-port
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
